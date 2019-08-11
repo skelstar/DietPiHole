@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    restart: unless-stopped
+    ports:
+    - 9000:9000
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ${DOCKERSTUFF_CONFIG}/portainer:/data
+
+# https://github.com/jansepke/rpi-dnsmasq    
+  # dnsmasq:
+  #   image: jansepke/rpi-dnsmasq
+  #   container_name: dnsmasq
+  #   restart: unless-stopped
+  #   network_mode: host
+  #   # ports:
+  #   # - 53:53/tcp
+  #   # - 53:53/udp
+  #   volumes: 
+  #   - ${DOCKERSTUFF_CONFIG}/:/etc/
